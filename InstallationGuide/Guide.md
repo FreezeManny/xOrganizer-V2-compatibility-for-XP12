@@ -16,8 +16,9 @@
     1. Open Settings and select `Start X-Plane with shortcut, script or bat file`
 
     ![Open settings](OpenSettings.png)
-    2. Enter the path of the `xorg2-xp12.exe` as the Start Command and Confirm
-    
+    2. Enter the path of the `xorg2-xp12.exe` as the Start Command and Confirm.
+    In my case it was `D:/X-Plane12/Custom Scenery/xorg2-xp12.exe`
+
     ![Settings start command](SettingsStartCommand.png)
 
 5. Open X-Plane from X-Organizer V2 for the changes of V2 to work.

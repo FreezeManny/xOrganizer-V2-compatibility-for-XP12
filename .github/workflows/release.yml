@@ -1,0 +1,38 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Build Windows executable
+        run: GOOS=windows GOARCH=amd64 go build -o xorg2-xp12.exe .
+
+      - name: Install pandoc and wkhtmltopdf
+        run: sudo apt-get install -y pandoc wkhtmltopdf
+
+      - name: Generate InstallGuide PDF
+        working-directory: InstallationGuide
+        run: pandoc Guide.md -o ../InstallGuide.pdf --pdf-engine=wkhtmltopdf
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            xorg2-xp12.exe
+            InstallGuide.pdf
